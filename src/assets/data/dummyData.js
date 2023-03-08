@@ -13,43 +13,43 @@ import shoe12 from "../images/shoe12.jpg";
 import shirt1 from "../images/t-shirt1.jpg";
 import shirt2 from "../images/t-shirt2.jpg";
 import shirt3 from "../images/t-shirt3.jpg";
-import shirt4 from "../images/t-shirt4.jpg";
-import shirt5 from "../images/t-shirt5.jpg";
-import shirt6 from "../images/t-shirt6.jpg";
+import shirt4 from "../images/t-shirt4.jpeg";
+import shirt5 from "../images/t-shirt5.jpeg";
+import shirt6 from "../images/t-shirt6.jpeg";
 import shirt7 from "../images/t-shirt7.jpg";
 import shirt8 from "../images/t-shirt8.jpg";
 import hoodie1 from "../images/hoodie1.jpg";
-import hoodie2 from "../images/hoodie2.jpg";
-import hoodie3 from "../images/hoodie3.jpg";
+import hoodie2 from "../images/hoodie2.jpeg";
+import hoodie3 from "../images/hoodie3.jpeg";
 import hoodie4 from "../images/hoodie4.jpg";
-import hoodie5 from "../images/hoodie5.jpg";
+import hoodie5 from "../images/hoodie5.jpeg";
 import hoodie6 from "../images/hoodie6.jpg";
 import hoodie7 from "../images/hoodie7.jpg";
-import hoodie8 from "../images/hoodie8.jpg";
-import dress1 from "../images/dress1.jpg";
-import dress2 from "../images/dress2.jpg";
-import dress3 from "../images/dress3.jpg";
-import dress4 from "../images/dress4.jpg";
-import dress5 from "../images/dress5.jpg";
-import dress6 from "../images/dress6.jpg";
-import dress7 from "../images/dress7.jpg";
-import dress8 from "../images/dress8.jpg";
-import jeans1 from "../images/jeans1.jpg";
-import jeans2 from "../images/jeans2.jpg";
+import hoodie8 from "../images/hoodie8.jpeg";
+import hijab from "../images/hijab.jpeg";
+import hijab2 from "../images/hijab2.jpeg";
+import hijab3 from "../images/hijab3.jpeg";
+import hijab4 from "../images/hijab4.jpeg";
+import hijab5 from "../images/hijab5.jpeg";
+import hijab6 from "../images/hijab6.jpeg";
+import hijab7 from "../images/hijab7.jpeg";
+import hijab8 from "../images/hijab8.jpeg";
+import jeans1 from "../images/jeans1.jpeg";
+import jeans2 from "../images/jeans2.jpeg";
 import jeans3 from "../images/jeans3.jpg";
-import jeans4 from "../images/jeans4.jpg";
-import jeans5 from "../images/jeans5.jpg";
-import jeans6 from "../images/jeans6.jpg";
+import jeans4 from "../images/jeans4.jpeg";
+import jeans5 from "../images/jeans5.jpeg";
+import jeans6 from "../images/jeans6.jpeg";
 import jeans7 from "../images/jeans7.jpg";
 import jeans8 from "../images/jeans8.jpg";
 import jacket1 from "../images/jacket1.jpg";
 import jacket2 from "../images/jacket2.jpg";
 import jacket3 from "../images/jacket3.jpg";
 import jacket4 from "../images/jacket4.jpg";
-import jacket5 from "../images/jacket5.jpg";
+import jacket5 from "../images/jacket5.jpeg";
 import jacket6 from "../images/jacket6.jpg";
-import jacket7 from "../images/jacket7.jpg";
-import jacket8 from "../images/jacket8.jpg";
+import jacket7 from "../images/jacket7.jpeg";
+import jacket8 from "../images/jacket8.jpeg";
 import bag1 from "../images/bag1.jpg";
 import bag2 from "../images/bag2.jpg";
 import bag3 from "../images/bag3.jpg";
@@ -63,28 +63,28 @@ import suit2 from "../images/suit2.jpg";
 import suit3 from "../images/suit3.jpg";
 import suit4 from "../images/suit4.jpg";
 import suit5 from "../images/suit5.jpg";
-import suit6 from "../images/suit6.jpg";
+import suit6 from "../images/suit6.jpeg";
 import suit7 from "../images/suit7.jpg";
 import suit8 from "../images/suit8.jpg";
 
 export const sliderData = [
   {
-    id: "0",
+    id: "1",
     img: shoe1,
     text: "Summers SALE up to 50% OFF what are you wating for",
   },
   {
-    id: "1",
+    id: "2",
     img: shoe2,
     text: "AUTUMN is coming, choose what suits you THE BEST",
   },
   {
-    id: "2",
+    id: "3",
     img: shoe3,
     text: "Make your feet as comfortable as walking on the beach",
   },
   {
-    id: "3",
+    id: "4",
     img: shoe4,
     text: "Choose between basketball and fashion or choose both",
   },
@@ -359,10 +359,10 @@ export const storeData = [
   },
   {
     id: "25",
-    img: dress1,
-    name: "Casual Dress 1",
+    img: hijab,
+    name: "Casual Hijab 1",
     text: "Fashion never stops. There is always the new project, the new opportunity. The important thing is to take your time and not get stressed. I just want to do what I do.",
-    type: "Dresses",
+    type: "hijabs",
     size: ["L", "XL"],
     color: ["purple", "blue", "gray"],
     gender: "female",
@@ -370,10 +370,10 @@ export const storeData = [
   },
   {
     id: "26",
-    img: dress2,
-    name: "Casual Dress 2",
+    img: hijab2,
+    name: "Casual hijab 2",
     text: "Fashion never stops. There is always the new project, the new opportunity. The important thing is to take your time and not get stressed. I just want to do what I do.",
-    type: "Dresses",
+    type: "hijabs",
     size: ["S", "M", "XL"],
     color: ["black", "gray", "green"],
     gender: "female",
@@ -381,10 +381,10 @@ export const storeData = [
   },
   {
     id: "27",
-    img: dress3,
-    name: "Casual Dress 3",
+    img: hijab3,
+    name: "Casual hijab 3",
     text: "Fashion never stops. There is always the new project, the new opportunity. The important thing is to take your time and not get stressed. I just want to do what I do.",
-    type: "Dresses",
+    type: "hijabs",
     size: ["S", "M", "XL"],
     color: ["purple", "blue", "red"],
     gender: "female",
@@ -392,10 +392,10 @@ export const storeData = [
   },
   {
     id: "28",
-    img: dress4,
-    name: "Casual Dress 4",
+    img: hijab4,
+    name: "Casual hijab 4",
     text: "Fashion never stops. There is always the new project, the new opportunity. The important thing is to take your time and not get stressed. I just want to do what I do.",
-    type: "Dresses",
+    type: "hijabs",
     size: ["S", "L", "XL"],
     color: ["yellow", "blue", "orange"],
     gender: "female",
@@ -403,10 +403,10 @@ export const storeData = [
   },
   {
     id: "29",
-    img: dress5,
-    name: "Casual Dress 5",
+    img: hijab5,
+    name: "Casual hijab 5",
     text: "Fashion never stops. There is always the new project, the new opportunity. The important thing is to take your time and not get stressed. I just want to do what I do.",
-    type: "Dresses",
+    type: "hijabs",
     size: ["S", "L", "XL"],
     color: ["yellow", "orange"],
     gender: "female",
@@ -414,10 +414,10 @@ export const storeData = [
   },
   {
     id: "30",
-    img: dress6,
-    name: "Casual Dress 6",
+    img: hijab6,
+    name: "Casual hijab 6",
     text: "Fashion never stops. There is always the new project, the new opportunity. The important thing is to take your time and not get stressed. I just want to do what I do.",
-    type: "Dresses",
+    type: "hijabs",
     size: ["S", "M"],
     color: ["yellow", "blue", "black"],
     gender: "female",
@@ -425,10 +425,10 @@ export const storeData = [
   },
   {
     id: "31",
-    img: dress7,
-    name: "Casual Dress 7",
+    img: hijab7,
+    name: "Casual hijab 7",
     text: "Fashion never stops. There is always the new project, the new opportunity. The important thing is to take your time and not get stressed. I just want to do what I do.",
-    type: "Dresses",
+    type: "hijabs",
     size: ["S", "M"],
     color: ["orange", "blue", "black"],
     gender: "female",
@@ -436,10 +436,10 @@ export const storeData = [
   },
   {
     id: "32",
-    img: dress8,
-    name: "Casual Dress 8",
+    img: hijab8,
+    name: "Casual hijab 8",
     text: "Fashion never stops. There is always the new project, the new opportunity. The important thing is to take your time and not get stressed. I just want to do what I do.",
-    type: "Dresses",
+    type: "hijabs",
     size: ["M", "L"],
     color: ["brown", "blue", "red"],
     gender: "female",
