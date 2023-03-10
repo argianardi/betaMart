@@ -28,6 +28,20 @@ const NavigateButtons = () => {
           </Button>
         ))}
       </div>
+
+      {/* Sales tagline */}
+      <div>
+        <div className="bg-green-300 p-2 w-[55%] mx-auto rounded-md">
+          <h3 className="text-lg font-bold leading-none tracking-normal text-center text-orange-900 font-inter">
+            Sales Up To 50%
+          </h3>
+        </div>
+        <img
+          src={clothes}
+          alt="clothes"
+          className="h-[600px] w-[70%] rounded-md shadow-lg shadow-gray-600 mx-auto my-4"
+        />
+      </div>
     </div>
   );
 };
