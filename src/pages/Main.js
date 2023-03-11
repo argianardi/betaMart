@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./Header";
-import NavigateButtons from "./NavigateButtons";
-import Slider from "./Slider";
+import Header from "../components/Header";
+import NavigateButtons from "../components/NavigateButtons";
+import Slider from "../components/Slider";
 
 const Main = () => {
   return (
