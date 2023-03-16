@@ -7,9 +7,11 @@ import {
   DialogFooter,
   Tooltip,
 } from "@material-tailwind/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../utils/redux/features/cartSlice";
 
 const Cart = ({ openModal, setOpen }) => {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
 
@@ -73,7 +75,7 @@ const Cart = ({ openModal, setOpen }) => {
                         placement="bottom"
                       >
                         <Button
-                          onClick
+                          onClick={() => dispatch(removeFromCart(item))}
                           size="sm"
                           color="red"
                           ripple={true}
