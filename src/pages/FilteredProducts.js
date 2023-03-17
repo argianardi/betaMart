@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
 
 const FilteredProducts = () => {
@@ -10,7 +11,8 @@ const FilteredProducts = () => {
 
   return (
     <>
-      <div className="pt-16">
+      <Header />
+      <div className="pt-2">
         <div className="mb-10 pl-14">
           <h1 className="text-4xl font-bold leading-none tracking-normal text-gray-600 font-inter">
             {type}
