@@ -1,10 +1,13 @@
 import { Button, Tooltip } from "@material-tailwind/react";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import Header from "../components/Header";
+import { addToCart } from "../utils/redux/features/cartSlice";
 
 const SingelProduct = () => {
   const product = useSelector((state) => state.products.singleProduct)[0];
+  const dispatch = useDispatch();
   const { id } = useParams();
   const productSize = product.size ? product.size[0] : "";
   const [size, setSize] = useState(productSize);
@@ -13,6 +16,8 @@ const SingelProduct = () => {
 
   return (
     <>
+      {/* Header component */}
+      <Header />
       <div className="flex items-center justify-center py-10">
         {/* Product image */}
         <div className="pl-44 grow-[2]">
@@ -51,7 +56,7 @@ const SingelProduct = () => {
                   onChange={(e) => setSize(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 >
-                  {product.size.map((size, index) => (
+                  {product.size?.map((size, index) => (
                     <option key={index} value={size}>
                       {size}
                     </option>
@@ -85,7 +90,27 @@ const SingelProduct = () => {
             )}
             {/* Button add to cart */}
             <Tooltip content="Add to Cart" placement="bottom">
-              <Button color="gray" size="lg" variant="outlined" ripple={true}>
+              <Button
+                onClick={() =>
+                  dispatch(
+                    addToCart({
+                      id: product.id,
+                      name: product.name,
+                      img: product.img,
+                      text: product.text,
+                      size: size,
+                      color: color,
+                      price: product.price,
+                      amount: 1,
+                      totalPrice: product.price,
+                    })
+                  )
+                }
+                color="gray"
+                size="lg"
+                variant="outlined"
+                ripple={true}
+              >
                 Add to Cart
               </Button>
             </Tooltip>
