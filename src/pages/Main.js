@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import NavigateButtons from "../components/NavigateButtons";
 import ProductsSection from "../components/ProductsSection";
@@ -11,6 +12,7 @@ const Main = () => {
       <Slider />
       <NavigateButtons />
       <ProductsSection />
+      <Footer />
     </>
   );
 };
