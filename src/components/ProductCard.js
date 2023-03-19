@@ -1,41 +1,71 @@
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { singleProduct } from "../utils/redux/features/productsSlice";
+import { FaStar } from "react-icons/fa";
+// import { useDispatch } from "react-redux";
+// import { singleProduct } from "../utils/redux/features/productsSlice";
 
-const ProductCard = ({ id, name, text, img, price, colors }) => {
-  const dispatch = useDispatch();
+const ProductCard = ({
+  id,
+  title,
+  description,
+  price,
+  discount,
+  rating,
+  stock,
+  category,
+  image,
+}) => {
+  // const dispatch = useDispatch();
+
+  // Calculate product price without discount
+  const priceWithoutDiscount = (discountedPrice, discount) => {
+    let oriPrice = discountedPrice / ((100 - discount) / 100);
+    oriPrice = Math.floor(oriPrice);
+    return oriPrice;
+  };
+
   return (
     <Link to={`/one-product/${id}`}>
-      <Card onClick={() => dispatch(singleProduct(id))} className="w-96">
-        <CardHeader color="blue" className="relative h-96">
-          <img loading="lazy" src={img} alt={name} className="w-full h-full" />
-        </CardHeader>
-        <CardBody className="text-center">
-          <Typography variant="h5" className="mb-2">
-            {name}
+      <Card
+        // onClick={() => dispatch(singleProduct(id))}
+        className="h-48 overflow-hidden border-2 border-gray-100 w-36"
+      >
+        <figure color="blue" className="w-full h-24">
+          <img
+            loading="lazy"
+            src={image}
+            alt={title}
+            className="object-cover w-full h-full"
+          />
+        </figure>
+        {/* xs: "320px", sm: "375px", sml: "500px", mdm: "667px", mdl: "768px", lg: "960px", lgl: "1024px", xlm: "1280px", */}
+        <div className="w-full p-1">
+          <Typography className="overflow-hidden text-xs truncate">
+            {title}
           </Typography>
-          <Typography>{text}</Typography>
-        </CardBody>
-        <CardFooter divider className="flex items-center justify-between py-3">
-          <Typography variant="small">{price}$</Typography>
-          <Typography variant="small" color="gray" className="flex gap-1">
-            {colors?.map((color, index) => (
-              <i
-                key={index}
-                style={{ backgroundColor: color }}
-                className="fas fa-map-marker-alt fa-sm  mt-[3px] p-2 rounded-full mr-4"
-              />
-            ))}
-          </Typography>
-        </CardFooter>
+          <div className="flex">
+            <Typography variant="small" className="mr-12 font-bold">
+              {price}$
+            </Typography>
+            <FaStar color="#ffc107" />
+            <Typography variant="small" className="ml-1">
+              {rating}
+            </Typography>
+          </div>
+          <div className="flex items-center">
+            <Typography
+              variant="small"
+              className="px-1 mr-1 font-bold text-gray-100 bg-orange-600 rounded-md"
+            >
+              {discount}%
+            </Typography>
+            <Typography className="text-xs line-through">
+              {priceWithoutDiscount(price, discount)}$
+            </Typography>
+          </div>
+          <Typography variant="small">Stock: {stock}</Typography>
+        </div>
       </Card>
     </Link>
   );
