@@ -9,3 +9,7 @@
     @apply flex items-center justify-center text-gray-400 duration-500 bg-gray-800 border border-transparent rounded-full cursor-pointer w-7 h-7 hover:bg-gray-900 hover:text-white hover:border-gray-500;
   }
 }
+
+.bg-blur {
+  backdrop-filter: blur(5px);
+}
