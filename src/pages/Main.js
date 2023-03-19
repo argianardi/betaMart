@@ -31,6 +31,23 @@ const Main = () => {
         <Slider />
       </div>
 
+      {/* product section */}
+      <div className="grid grid-cols-2 w-[310px] sm:w-[360px] px-0 sm:px-4 sml:px-0 mx-auto my-16 sml:grid-cols-3 gap-y-2 sm:gap-y-4 sml:gap-y-2 mdm:w-[650px] sml:w-[460px] justify-items-center mdm:grid-cols-4 mdm:gap-y-4 lgm:grid-cols-6 lgm:w-[900px] xlm:w-[1250px] xlm:px-10 xlm:gap-y-10">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            title={product.title}
+            description={product.description}
+            price={product.price}
+            discount={product.discountPercentage}
+            rating={product.rating}
+            stock={product.stock}
+            category={product.category}
+            image={product.thumbnail}
+          />
+        ))}
+      </div>
       {/* <NavigateButtons /> */}
       <Footer />
     </>
