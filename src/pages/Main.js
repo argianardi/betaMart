@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Loading from "../components/Loading";
 import ProductCard from "../components/ProductCard";
-// import NavigateButtons from "../components/NavigateButtons";
-// import ProductsSection from "../components/ProductsSection";
 import Slider from "../components/Slider";
 import {
   getAllProducts,
@@ -16,11 +15,23 @@ const Main = () => {
 
   const products = useSelector(productsSelectors.selectAll);
   const getAllProductsStatus = useSelector((state) => state.products.status);
-  const getAllProductsError = useSelector((state) => state.products.error);
 
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
+
+  // Loading condition
+  if (getAllProductsStatus === "loading") {
+    return (
+      <>
+        <Header />
+        <div className="-mt-24">
+          <Loading />
+        </div>
+        <Footer />
+      </>
+    );
+  }
 
   return (
     <>
@@ -48,6 +59,7 @@ const Main = () => {
           />
         ))}
       </div>
+
       {/* <NavigateButtons /> */}
       <Footer />
     </>
