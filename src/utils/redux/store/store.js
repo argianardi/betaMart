@@ -21,14 +21,14 @@ const persistConfig = {
 };
 
 // New products reducer for persisted products state
-const persistedProductsReducer = persistReducer(persistConfig, productsReducer);
+const persistedCartReducer = persistReducer(persistConfig, cartReducer);
 
 // Redux store configuration
 export const store = configureStore({
   reducer: {
     slider: sliderReducer,
-    products: persistedProductsReducer,
-    cart: cartReducer,
+    products: productsReducer,
+    cart: persistedCartReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
