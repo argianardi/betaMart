@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Typography } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
-// import { useDispatch } from "react-redux";
-// import { singleProduct } from "../utils/redux/features/productsSlice";
+import ProductDetails from "./ProductDetails";
 
 const ProductCard = ({
   id,
@@ -16,7 +14,7 @@ const ProductCard = ({
   category,
   image,
 }) => {
-  // const dispatch = useDispatch();
+  const [openProductDetails, setOpenProductDetails] = useState(false);
 
   // Calculate product price without discount
   const priceWithoutDiscount = (discountedPrice, discount) => {
@@ -26,11 +24,12 @@ const ProductCard = ({
   };
 
   return (
-    <Link to={`/one-product/${id}`}>
+    <>
       <Card
-        // onClick={() => dispatch(singleProduct(id))}
-        className="h-48 overflow-hidden border-2 border-gray-100 w-36"
+        onClick={() => setOpenProductDetails(true)}
+        className="h-48 overflow-hidden border-2 border-gray-100 cursor-pointer w-36"
       >
+        {/* Product image */}
         <figure color="blue" className="w-full h-24">
           <img
             loading="lazy"
@@ -39,7 +38,8 @@ const ProductCard = ({
             className="object-cover w-full h-full"
           />
         </figure>
-        {/* xs: "320px", sm: "375px", sml: "500px", mdm: "667px", mdl: "768px", lg: "960px", lgl: "1024px", xlm: "1280px", */}
+
+        {/* Product description */}
         <div className="w-full p-1">
           <Typography className="overflow-hidden text-xs truncate">
             {title}
@@ -67,7 +67,23 @@ const ProductCard = ({
           <Typography variant="small">Stock: {stock}</Typography>
         </div>
       </Card>
-    </Link>
+
+      {/* Product details Modal */}
+      {openProductDetails && (
+        <ProductDetails
+          openProductDetails={openProductDetails}
+          setOpenProductDetails={setOpenProductDetails}
+          title={title}
+          description={description}
+          price={price}
+          discount={discount}
+          rating={rating}
+          stock={stock}
+          category={category}
+          image={image}
+        />
+      )}
+    </>
   );
 };
 
