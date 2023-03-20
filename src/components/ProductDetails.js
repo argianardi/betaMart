@@ -37,7 +37,7 @@ const ProductDetails = ({
         mount: { scale: 1, y: 0 },
         unmount: { scale: 0.9, y: -100 },
       }}
-      className="max-w-full w-[310px] sm:w-[360px] sml:w-[480px] mdl:w-[600px] lgl:w-[800px] xlm:w-[900px] mx-auto max-h-screen overflow-y-auto rounded-md"
+      className="max-w-full w-[310px] sm:w-[360px] sml:w-[480px] mdl:w-[600px] lgl:w-[800px] xlm:w-[900px] mx-auto max-h-screen overflow-y-auto rounded-none xlm:rounded-md"
     >
       {/* Button close */}
       <div className="sticky top-0 z-20 text-end">
@@ -51,11 +51,11 @@ const ProductDetails = ({
 
       <div className="items-center block lgl:flex">
         {/*Product image, price, title  and wishlist & cart button*/}
-        <div className="w-full lgl:w-[800px] xlm:w-[900px]">
+        <div className="w-full lgl:w-[500px]">
           <img
             src={image}
             alt={title}
-            className="object-cover w-full -mt-8 h-[200px] sml:h-[250px] mdm:h-[300px] lgl:w-full"
+            className="object-cover w-full -mt-8 h-[200px] sml:h-[250px] mdm:h-[300px] lgl:w-[500px]"
           />
           <div className="flex justify-between px-10 mt-2 text-black mdl:px-28 lgl:px-5 xlm:px-20">
             <button className="flex items-center ">
@@ -91,7 +91,7 @@ const ProductDetails = ({
           <div className="pl-2 pt-1 mt-4 lgl:mt-0 text-sm text-gray-800 border-t-[2px] border-t-gray-800 lgl:border-0">
             <h4 className="font-bold text-black">Product Details</h4>
             <p>Category: {category}</p>
-            <p>Stok: {stock}</p>
+            <p>Stock: {stock}</p>
             <p>Discount: {discount}%</p>
             <div className="flex">
               <span>Rating:</span>
