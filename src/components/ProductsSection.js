@@ -8,7 +8,7 @@ const ProductsSection = () => {
 
   return (
     <div className="grid grid-cols-3 px-8 my-16 gap-y-16 justify-items-center">
-      {products.map((product, index) => (
+      {products.map((product) => (
         <ProductCard
           key={product.id}
           id={product.id}
