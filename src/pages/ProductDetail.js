@@ -13,7 +13,7 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const { productId } = useParams();
 
-  const [amount, setAmount] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState([]);
   const [getProductLoading, setGetProductLoading] = useState(true);
   const [getProductError, setGetProductError] = useState("");
@@ -21,9 +21,6 @@ const ProductDetail = () => {
   const [productsByCategoryLoading, setProductsByCategoryLoading] =
     useState(true);
   const [productsByCategoryError, setProductsByCategoryError] = useState("");
-  const [totalPricePerProduct, setTotalPricePerProduct] = useState(
-    product.price
-  );
 
   const relatedProducts = productsByCategory.filter(
     (item) => item.id !== product.id
@@ -67,20 +64,17 @@ const ProductDetail = () => {
   useEffect(() => {
     getProductsByCategory();
   }, [getProductsByCategory]);
-  console.log("product", productsByCategory);
 
-  // Handle decrease Amount
-  const handleDecreaseAmount = () => {
-    if (amount > 1) {
-      setAmount(amount - 1);
-      setTotalPricePerProduct((amount - 1) * product.price);
+  // Handle decrease quantity
+  const handleDecreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
     }
   };
 
-  //   Handle  Increase Amount
-  const handleIncreaseAmount = () => {
-    setAmount(amount + 1);
-    setTotalPricePerProduct((amount + 1) * product.price);
+  //   Handle  Increase quantity
+  const handleIncreaseQuantity = () => {
+    setQuantity(quantity + 1);
   };
 
   return (
@@ -104,14 +98,14 @@ const ProductDetail = () => {
               </button>
               <div className="flex items-center border-[1px] border-black rounded-md h-7 mx-2">
                 <button
-                  onClick={handleDecreaseAmount}
+                  onClick={handleDecreaseQuantity}
                   className="px-2 font-bold"
                 >
                   -
                 </button>
-                <p className="mx-2">{amount}</p>
+                <p className="mx-2">{quantity}</p>
                 <button
-                  onClick={handleIncreaseAmount}
+                  onClick={handleIncreaseQuantity}
                   className="px-2 font-bold"
                 >
                   +
@@ -123,9 +117,9 @@ const ProductDetail = () => {
                     addToCart({
                       id: product.id,
                       price: product.price,
-                      amount: amount,
+                      quantity: quantity,
                       image: product.thumbnail,
-                      totalPricePerProduct: totalPricePerProduct,
+                      totalPricePerProduct: product.price * quantity,
                       title: product.title,
                     })
                   )
@@ -139,7 +133,7 @@ const ProductDetail = () => {
               </button>
             </div>
             <h4 className="pt-2 pl-2 text-sm font-semibold text-black font-inter">
-              ${amount * product.price}
+              ${quantity * product.price}
             </h4>
             <h5 className="pl-2 text-base text-black">{product.title}</h5>
           </div>
