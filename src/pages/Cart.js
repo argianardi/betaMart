@@ -2,13 +2,10 @@ import React from "react";
 import { Button, Card, Tooltip } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import Header from "../components/Header";
-import {
-  AiFillMinusCircle,
-  AiOutlineMinusCircle,
-  AiOutlinePlusCircle,
-} from "react-icons/ai";
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
+
 import { removeFromCart } from "../utils/redux/features/cartSlice";
+import Layout from "../components/Layout";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -17,13 +14,10 @@ const Cart = () => {
   console.log("products in cart", products);
 
   return (
-    <>
-      <Header />
-      <h2 className="mt-2 ml-2 text-xl font-bold mdl:ml-4 lgm:ml-10 lgl:ml-20 xlm:ml-44">
-        Cart
-      </h2>
+    <Layout>
+      <h2 className="mt-2 text-xl font-bold">Cart</h2>
       {products.length > 0 ? (
-        <div className="relative px-2 mdl:px-4 lgm:px-10 lgl:px-20 xlm:px-44">
+        <div className="relative">
           {/* Product details */}
           <div>
             {products.map((product) => (
@@ -38,7 +32,7 @@ const Cart = () => {
                       alt={product.title}
                       className="object-cover w-20 h-20 rounded-sm"
                     />
-                    <h4 className="mt-2 ml-2 text-sm leading-none tracking-normal text-gray-900 font-inter">
+                    <h4 className="mt-2 ml-2 text-sm leading-none tracking-normal text-gray-900 capitalize font-inter">
                       {product.title}
                     </h4>
                   </div>
@@ -47,14 +41,22 @@ const Cart = () => {
                   <div className="flex items-center justify-end mx-2">
                     <div className="flex mr-10">
                       <p className="pr-2 mr-2 font-bold border-r-2 border-gray-400">
-                        ${product.price}
+                        ${product.totalPricePerProduct}
                       </p>
                       <Tooltip
                         content="Remove from the Cart"
                         placement="bottom"
                       >
                         <button
-                          onClick={() => dispatch(removeFromCart(product.id))}
+                          onClick={() =>
+                            dispatch(
+                              removeFromCart({
+                                id: product.id,
+                                totalPricePerProduct:
+                                  product.totalPricePerProduct,
+                              })
+                            )
+                          }
                         >
                           <MdDelete color="red" className="text-2xl" />
                         </button>
@@ -64,7 +66,7 @@ const Cart = () => {
                       <button>
                         <AiOutlineMinusCircle className="text-lg" />
                       </button>
-                      <p className="mx-2">{product.amount}</p>
+                      <p className="mx-2">{product.quantity}</p>
                       <button>
                         <AiOutlinePlusCircle className="text-lg" />
                       </button>
@@ -100,7 +102,7 @@ const Cart = () => {
           </p>
         </div>
       )}
-    </>
+    </Layout>
   );
 };
 
