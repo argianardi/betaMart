@@ -1,21 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Typography } from "@material-tailwind/react";
 import { FaStar } from "react-icons/fa";
-import ProductDetails from "./ProductDetails";
+import { Link } from "react-router-dom";
 
-const ProductCard = ({
-  id,
-  title,
-  description,
-  price,
-  discount,
-  rating,
-  stock,
-  category,
-  image,
-}) => {
-  const [openProductDetails, setOpenProductDetails] = useState(false);
-
+const ProductCard = ({ id, title, price, discount, rating, stock, image }) => {
   // Calculate product price without discount
   const priceWithoutDiscount = (discountedPrice, discount) => {
     let oriPrice = discountedPrice / ((100 - discount) / 100);
@@ -24,11 +12,8 @@ const ProductCard = ({
   };
 
   return (
-    <>
-      <Card
-        onClick={() => setOpenProductDetails(true)}
-        className="h-48 overflow-hidden border-2 border-gray-100 cursor-pointer w-36"
-      >
+    <Card className="h-48 overflow-hidden border-2 border-gray-100 cursor-pointer w-36 hover:bg-blue-gray-50">
+      <Link to={`/product-detail/${id}`} onClick={() => window.scrollTo(0, 0)}>
         {/* Product image */}
         <figure color="blue" className="w-full h-24">
           <img
@@ -66,24 +51,8 @@ const ProductCard = ({
           </div>
           <Typography variant="small">Stock: {stock}</Typography>
         </div>
-      </Card>
-
-      {/* Product details Modal */}
-      {openProductDetails && (
-        <ProductDetails
-          openProductDetails={openProductDetails}
-          setOpenProductDetails={setOpenProductDetails}
-          title={title}
-          description={description}
-          price={price}
-          discount={discount}
-          rating={rating}
-          stock={stock}
-          category={category}
-          image={image}
-        />
-      )}
-    </>
+      </Link>
+    </Card>
   );
 };
 
