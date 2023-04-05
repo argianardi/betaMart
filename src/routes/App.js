@@ -1,8 +1,10 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SingelProduct from "../pages/SingelProduct";
+
 import FilteredProducts from "../pages/FilteredProducts";
 import Main from "../pages/Main";
+import Cart from "../pages/Cart";
+import ProductDetail from "../pages/ProductDetail";
 
 function App() {
   return (
@@ -10,7 +12,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/filtered-products/:type" element={<FilteredProducts />} />
-        <Route path="/one-product/:id" element={<SingelProduct />} />
+        <Route path="/product-detail/:productId" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );
