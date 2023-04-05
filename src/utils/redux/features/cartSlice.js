@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 // initial state
 const initialState = {
   products: [],
-  amount: 0,
-  totalAmount: 0,
+  quantity: 0,
+  totalQuantity: 0,
   grandTotal: 0,
 };
 
@@ -20,44 +20,26 @@ const cartSlice = createSlice({
         (product) => product.id === newProduct.id
       );
       if (existingProducts) {
-        existingProducts.amount += newProduct.amount;
+        existingProducts.quantity += newProduct.quantity;
         existingProducts.totalPricePerProduct +=
           newProduct.totalPricePerProduct;
-        state.totalAmount++;
+        state.totalQuantity++;
         state.grandTotal += newProduct.totalPricePerProduct;
       } else {
         state.products.unshift({
           ...action.payload,
         });
-        state.totalAmount++;
+        state.totalQuantity++;
         state.grandTotal += newProduct.totalPricePerProduct;
       }
     },
 
     // Remove from cart reducer
-    removeFromCart(state, action) {
-      const newProduct = action.payload;
-      const existingProducts = state.products.find(
-        (product) =>
-          product.id === newProduct.id &&
-          product.size === newProduct.size &&
-          product.color === newProduct.color
+    removeFromCart: (state, action) => {
+      state.products = state.products.filter(
+        (product) => product.id !== action.payload.id
       );
-      if (existingProducts.amount === 1) {
-        state.cart = state.cart.filter(
-          (product) =>
-            product.id !== newProduct.id ||
-            product.size !== newProduct.size ||
-            product.color !== newProduct.color
-        );
-        state.totalAmount--;
-        state.totalPrice -= newProduct.price;
-      } else {
-        existingProducts.amount--;
-        existingProducts.totalAmount--;
-        state.totalAmount--;
-        state.totalPrice -= newProduct.price;
-      }
+      state.grandTotal -= action.payload.totalPricePerProduct;
     },
   },
 });
