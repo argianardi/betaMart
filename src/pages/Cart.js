@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 
 import {
+  decreaseQuantity,
   increaseQuantity,
   removeFromCart,
 } from "../utils/redux/features/cartSlice";
@@ -14,7 +15,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.cart.products);
   const grandTotal = useSelector((state) => state.cart.grandTotal);
-  console.log("products in cart", products);
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
   return (
     <Layout>
@@ -67,21 +68,23 @@ const Cart = () => {
                       </Tooltip>
                     </div>
                     <div className="flex items-center">
-                      <button>
-                        <AiOutlineMinusCircle className="text-lg" />
+                      <button
+                        onClick={() => dispatch(decreaseQuantity(product.id))}
+                        disabled={product.quantity === 1 && true}
+                      >
+                        <AiOutlineMinusCircle
+                          className={`text-2xl font-bold ${
+                            product.quantity === 1
+                              ? `text-gray-400`
+                              : `text-green-500`
+                          }`}
+                        />
                       </button>
                       <p className="mx-2">{product.quantity}</p>
                       <button
-                        onClick={() =>
-                          dispatch(
-                            increaseQuantity({
-                              id: product.id,
-                              grandTotal: grandTotal,
-                            })
-                          )
-                        }
+                        onClick={() => dispatch(increaseQuantity(product.id))}
                       >
-                        <AiOutlinePlusCircle className="text-lg" />
+                        <AiOutlinePlusCircle className="text-2xl font-bold text-green-500" />
                       </button>
                     </div>
                   </div>
@@ -97,20 +100,20 @@ const Cart = () => {
                 Grand Total
               </span>
               <span className="mt-1 font-bold text-black mdl:mt-0">
-                ${grandTotal}{" "}
+                ${grandTotal}
               </span>
             </p>
             <Button color="green" className="w-full mt-0 mdl:mt-2">
-              Buy (100)
+              Buy ({totalQuantity})
             </Button>
           </div>
         </div>
       ) : (
-        <div>
-          <h1 className="py-4 text-3xl font-bold leading-none tracking-normal text-black font-inter">
+        <div className="flex flex-col items-center justify-center h-screen">
+          <h1 className="py-4 text-2xl font-bold leading-none tracking-normal text-black xs:text-3xl font-inter">
             Your cart is empty
           </h1>
-          <p className="text-base leading-none tracking-normal text-black font-inter">
+          <p className="mb-40 text-base leading-none tracking-normal text-black font-inter">
             Add some products
           </p>
         </div>
