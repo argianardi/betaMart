@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 
-import { removeFromCart } from "../utils/redux/features/cartSlice";
+import {
+  increaseQuantity,
+  removeFromCart,
+} from "../utils/redux/features/cartSlice";
 import Layout from "../components/Layout";
 
 const Cart = () => {
@@ -17,13 +20,13 @@ const Cart = () => {
     <Layout>
       <h2 className="mt-2 text-xl font-bold">Cart</h2>
       {products.length > 0 ? (
-        <div className="relative">
+        <div>
           {/* Product details */}
           <div>
             {products.map((product) => (
               <Card
                 key={product.id}
-                className="w-full p-1 my-6 mdl:w-[500px] lgm:w-[600px]"
+                className="w-full p-1 my-6 mdl:w-[470px] lgm:w-[600px]"
               >
                 <div className="justify-between block mdm:flex">
                   <div className="flex w-full mdm:w-96">
@@ -52,6 +55,7 @@ const Cart = () => {
                             dispatch(
                               removeFromCart({
                                 id: product.id,
+                                quantity: product.quantity,
                                 totalPricePerProduct:
                                   product.totalPricePerProduct,
                               })
@@ -67,7 +71,16 @@ const Cart = () => {
                         <AiOutlineMinusCircle className="text-lg" />
                       </button>
                       <p className="mx-2">{product.quantity}</p>
-                      <button>
+                      <button
+                        onClick={() =>
+                          dispatch(
+                            increaseQuantity({
+                              id: product.id,
+                              grandTotal: grandTotal,
+                            })
+                          )
+                        }
+                      >
                         <AiOutlinePlusCircle className="text-lg" />
                       </button>
                     </div>
@@ -78,7 +91,7 @@ const Cart = () => {
           </div>
 
           {/* Grand total and buy buttons  */}
-          <div className="sticky mdl:abolute bottom-0 flex flex-row items-center justify-between w-full p-2 mdl:flex-col bg-blur bg-white/40 mdl:left-[100%] mdl:bottom-7 mdl:w-52  mdl:border-[1px] border-gray-400">
+          <div className="sticky bottom-0 flex flex-row items-center justify-between w-full p-2 mdl:flex-col bg-blur bg-white/40 mdl:left-[100%] mdl:bottom-7 mdl:w-52  mdl:border-[1px] border-gray-400">
             <p className="flex flex-col w-full pt-2 text-base leading-none tracking-normal mdl:justify-between font-inter mdl:flex-row">
               <span className="text-sm font-bold text-gray-800">
                 Grand Total
