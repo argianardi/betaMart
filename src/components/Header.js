@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 
 const Header = () => {
-  const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white">
@@ -33,9 +33,9 @@ const Header = () => {
             className="flex flex-row items-center cursor-pointer"
           >
             <div className="relative">
-              {totalAmount > 0 && (
+              {totalQuantity > 0 && (
                 <span className="absolute w-5 h-5 text-sm text-center bg-gray-300 rounded-full -top-3 -right-3 font-inter">
-                  {totalAmount}
+                  {totalQuantity}
                 </span>
               )}
               <BsFillCartFill size={20} />
