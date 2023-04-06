@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Loading from "../components/Loading";
-import ProductCard from "../components/ProductCard";
-import Slider from "../components/Slider";
+
 import {
   getAllProducts,
   productsSelectors,
 } from "../utils/redux/features/productsSlice";
+import Layout from "../components/Layout";
+import Loading from "../components/Loading";
+import ProductCard from "../components/ProductCard";
+import Slider from "../components/Slider";
 
 const Main = () => {
   const dispatch = useDispatch();
-
   const products = useSelector(productsSelectors.selectAll);
   const getAllProductsStatus = useSelector((state) => state.products.status);
 
@@ -23,27 +22,25 @@ const Main = () => {
   // Loading condition
   if (getAllProductsStatus === "loading") {
     return (
-      <>
-        <Header />
+      <Layout>
+        {/* <Header /> */}
         <div className="-mt-24">
           <Loading />
         </div>
-        <Footer />
-      </>
+        {/* <Footer /> */}
+      </Layout>
     );
   }
 
   return (
-    <>
-      <Header />
-
+    <Layout>
       {/* slider section */}
-      <div className="h-[150px] sml:h-[200px] lgl:h-[300px] px-2 sm:px-4 mdl:px-12 lgl:px-20  my-3">
+      <div className="h-[150px] sml:h-[200px] lgl:h-[300px] my-3">
         <Slider />
       </div>
 
       {/* product section */}
-      <div className="grid grid-cols-2 w-[310px] sm:w-[360px] px-0 sm:px-4 sml:px-0 mx-auto my-16 sml:grid-cols-3 gap-y-2 sm:gap-y-4 sml:gap-y-2 mdm:w-[650px] sml:w-[460px] justify-items-center mdm:grid-cols-4 mdm:gap-y-4 lgm:grid-cols-6 lgm:w-[900px] xlm:w-[1250px] xlm:px-10 xlm:gap-y-10">
+      <div className="grid w-full gap-y-3 grid-cols-2 xs:w-[300px] sm:w-[360px] my-16 sml:grid-cols-3 mx-auto mdm:w-[650px] sml:w-[460px] justify-items-center mdm:grid-cols-4 mdm:gap-y-4 lgm:grid-cols-5 xlm:grid-cols-7 lgm:w-[800px] lgl:w-[850px] xlm:w-[1100px]">
         {products.map((product) => (
           <ProductCard
             key={product.id}
@@ -56,13 +53,11 @@ const Main = () => {
             stock={product.stock}
             category={product.category}
             image={product.thumbnail}
+            // onGotoProductDetail={() => gotoProductDetailHandler(product)}
           />
         ))}
       </div>
-
-      {/* <NavigateButtons /> */}
-      <Footer />
-    </>
+    </Layout>
   );
 };
 
