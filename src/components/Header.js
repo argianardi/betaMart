@@ -13,7 +13,11 @@ const Header = () => {
       {/* Logo and Navbar */}
       <div className="flex items-center justify-around my-2">
         {/* Logo */}
-        <Link to={"/"} className="flex flex-col items-center">
+        <Link
+          to={"/"}
+          onClick={() => window.scrollTo(0, 0)}
+          className="flex flex-col items-center"
+        >
           <img src={logo} alt="logo" className="h-10" />
           <h1 className="-mt-2 font-bold text-green-700 font-inter">
             Beta Mart
@@ -30,6 +34,7 @@ const Header = () => {
           </div>
           <Link
             to={"/cart"}
+            onClick={() => window.scrollTo(0, 0)}
             className="flex flex-row items-center cursor-pointer"
           >
             <div className="relative">
