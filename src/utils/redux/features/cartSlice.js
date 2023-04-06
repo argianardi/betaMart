@@ -45,16 +45,27 @@ const cartSlice = createSlice({
     // Increase quantity reducer
     increaseQuantity: (state, action) => {
       const updatedProduct = state.products.find(
-        (product) => product.id === action.payload.id
+        (product) => product.id === action.payload
       );
       updatedProduct.quantity++;
       updatedProduct.totalPricePerProduct += updatedProduct.price;
-      state.grandTotal += updatedProduct.price;
       state.totalQuantity++;
+      state.grandTotal += updatedProduct.price;
+    },
+
+    // Decrease quantity reducer
+    decreaseQuantity: (state, action) => {
+      const updatedProduct = state.products.find(
+        (product) => product.id === action.payload
+      );
+      updatedProduct.quantity--;
+      updatedProduct.totalPricePerProduct -= updatedProduct.price;
+      state.totalQuantity--;
+      state.grandTotal -= updatedProduct.price;
     },
   },
 });
 
-export const { addToCart, removeFromCart, increaseQuantity } =
+export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity } =
   cartSlice.actions;
 export default cartSlice.reducer;
