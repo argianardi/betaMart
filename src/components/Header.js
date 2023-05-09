@@ -1,5 +1,5 @@
 import React from "react";
-import { BsFillCartFill, BsHeartFill } from "react-icons/bs";
+import { BsFillCartFill, BsHeart } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -7,11 +7,14 @@ import logo from "../assets/images/logo.png";
 
 const Header = () => {
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const wishlistTotalQuantity = useSelector(
+    (state) => state.wishlist.wishlistTotalQuantity
+  );
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white">
       {/* Logo and Navbar */}
-      <div className="flex items-center justify-around my-2">
+      <div className="flex items-center justify-between px-4 my-2 mdl:px-10 lgm:px-20">
         {/* Logo */}
         <Link
           to={"/"}
@@ -25,29 +28,30 @@ const Header = () => {
         </Link>
 
         {/* Navbar */}
-        <nav className="flex flex-row items-center">
-          <div className="flex flex-row items-center">
-            <BsHeartFill size={20} />
-            <p className="ml-[1px] mr-2 text-base font-medium leading-none tracking-normal text-center font-inter">
-              Wish List
-            </p>
-          </div>
+        <nav className="flex flex-row items-center justify-between w-12">
+          <Link
+            to={"/wishlist"}
+            className="relative"
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            {wishlistTotalQuantity > 0 && (
+              <span className="absolute w-5 h-5 text-sm font-bold text-center text-white bg-red-700 rounded-full font-inter -top-3 -right-3">
+                {wishlistTotalQuantity}
+              </span>
+            )}
+            <BsHeart size={20} className="text-gray-700" />
+          </Link>
           <Link
             to={"/cart"}
             onClick={() => window.scrollTo(0, 0)}
-            className="flex flex-row items-center cursor-pointer"
+            className="relative"
           >
-            <div className="relative">
-              {totalQuantity > 0 && (
-                <span className="absolute w-5 h-5 text-sm text-center bg-gray-300 rounded-full -top-3 -right-3 font-inter">
-                  {totalQuantity}
-                </span>
-              )}
-              <BsFillCartFill size={20} />
-            </div>
-            <p className="mr-2 ml-[1px] text-base font-medium leading-none tracking-normal text-center font-inter">
-              Cart
-            </p>
+            {totalQuantity > 0 && (
+              <span className="absolute w-5 h-5 text-sm font-bold text-center text-white bg-red-700 rounded-full -top-3 -right-3 font-inter">
+                {totalQuantity}
+              </span>
+            )}
+            <BsFillCartFill size={20} className="text-gray-600" />
           </Link>
         </nav>
       </div>
