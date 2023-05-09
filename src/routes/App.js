@@ -5,6 +5,7 @@ import FilteredProducts from "../pages/FilteredProducts";
 import Main from "../pages/Main";
 import Cart from "../pages/Cart";
 import ProductDetail from "../pages/ProductDetail";
+import Wishlist from "../pages/Wishlist";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/filtered-products/:type" element={<FilteredProducts />} />
         <Route path="/product-detail/:productId" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
     </BrowserRouter>
   );
