@@ -1,72 +1,72 @@
-import React, { useState } from "react";
-import logo from "../assets/images/logo.png";
-import { BsFillCartFill, BsHeartFill } from "react-icons/bs";
-import Cart from "./Cart";
+import React from "react";
+import { BsFillCartFill, BsHeart } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Header = () => {
-  const totalAmount = useSelector((state) => state.cart.totalAmount);
-  const [open, setOpen] = useState(false);
+import logo from "../assets/images/logo.png";
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+const Header = () => {
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const wishlistTotalQuantity = useSelector(
+    (state) => state.wishlist.wishlistTotalQuantity
+  );
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white">
       {/* Logo and Navbar */}
-      <div className="flex items-center justify-around my-2">
+      <div className="flex items-center justify-between px-4 my-2 mdl:px-10 lgm:px-20">
         {/* Logo */}
-        <Link to={"/"} className="flex flex-col items-center">
+        <Link
+          to={"/"}
+          onClick={() => window.scrollTo(0, 0)}
+          className="flex flex-col items-center"
+        >
           <img src={logo} alt="logo" className="h-10" />
           <h1 className="-mt-2 font-bold text-green-700 font-inter">
-            Quick Mart
+            Beta Mart
           </h1>
         </Link>
 
         {/* Navbar */}
-        <nav className="flex flex-row items-center">
-          <div className="flex flex-row items-center">
-            <BsHeartFill size={20} />
-            <p className="ml-[1px] mr-2 text-base font-medium leading-none tracking-normal text-center font-inter">
-              Wish List
-            </p>
-          </div>
-          <div
-            className="flex flex-row items-center cursor-pointer"
-            onClick={handleOpen}
+        <nav className="flex flex-row items-center justify-between w-12">
+          <Link
+            to={"/wishlist"}
+            className="relative"
+            onClick={() => window.scrollTo(0, 0)}
           >
-            <div className="relative">
-              {totalAmount > 0 && (
-                <span className="absolute w-5 h-5 text-sm text-center bg-gray-300 rounded-full -top-3 -right-3 font-inter">
-                  {totalAmount}
-                </span>
-              )}
-              <BsFillCartFill size={20} />
-            </div>
-            <p className="mr-2 ml-[1px] text-base font-medium leading-none tracking-normal text-center font-inter">
-              Cart
-            </p>
-            <div>{open && <Cart openModal={open} setOpen={setOpen} />}</div>
-          </div>
-          <div className="mr-4 text-base font-medium leading-none tracking-normal text-center font-inter">
-            <button>Logout</button>
-          </div>
+            {wishlistTotalQuantity > 0 && (
+              <span className="absolute w-5 h-5 text-sm font-bold text-center text-white bg-red-700 rounded-full font-inter -top-3 -right-3">
+                {wishlistTotalQuantity}
+              </span>
+            )}
+            <BsHeart size={20} className="text-gray-700" />
+          </Link>
+          <Link
+            to={"/cart"}
+            onClick={() => window.scrollTo(0, 0)}
+            className="relative"
+          >
+            {totalQuantity > 0 && (
+              <span className="absolute w-5 h-5 text-sm font-bold text-center text-white bg-red-700 rounded-full -top-3 -right-3 font-inter">
+                {totalQuantity}
+              </span>
+            )}
+            <BsFillCartFill size={20} className="text-gray-600" />
+          </Link>
         </nav>
       </div>
 
       {/* Store superiority */}
-      <section className="flex justify-around w-full p-2 bg-black">
-        <div className="text-sm font-medium leading-none tracking-normal text-center text-white font-inter">
+      <section className="flex justify-between w-full p-2 bg-black sml:px-4 mdl:px-10 lgm:px-20">
+        <p className="text-xs font-medium leading-none tracking-normal text-white sml:text-sm font-inter">
           50% OFF
-        </div>
-        <div className="text-sm font-medium leading-none tracking-normal text-center text-white font-inter">
+        </p>
+        <p className="text-xs font-medium leading-none sml:ml-0 tracking-normal text-white sml:text-sm ml-0 sm:ml-[2px] font-inter">
           Free shipping and returns
-        </div>
-        <div className="text-sm font-medium leading-none tracking-normal text-center text-white font-inter">
+        </p>
+        <p className="text-xs font-medium leading-none ml-0 sm:ml-[2px] sml:ml-0 tracking-normal text-white sml:text-sm font-inter">
           Different payment methods
-        </div>
+        </p>
       </section>
     </header>
   );
