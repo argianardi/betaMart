@@ -1,33 +1,40 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 
-import {
-  getAllProducts,
-  productsSelectors,
-} from "../utils/redux/features/productsSlice";
 import Layout from "../components/Layout";
 import Loading from "../components/Loading";
 import ProductCard from "../components/ProductCard";
 import Slider from "../components/Slider";
+import productAPI from "../services/productAPI";
 
 const Main = () => {
-  const dispatch = useDispatch();
-  const products = useSelector(productsSelectors.selectAll);
-  const getAllProductsStatus = useSelector((state) => state.products.status);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
+    getAllProducts();
+  }, []);
+
+  const getAllProducts = async () => {
+    await productAPI
+      .get()
+      .then((res) => {
+        setProducts(res.data.products);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   // Loading condition
-  if (getAllProductsStatus === "loading") {
+  if (isLoading) {
     return (
       <Layout>
-        {/* <Header /> */}
         <div className="-mt-24">
           <Loading />
         </div>
-        {/* <Footer /> */}
       </Layout>
     );
   }
@@ -61,5 +68,3 @@ const Main = () => {
 };
 
 export default Main;
-
-// baru sampai wishlist di bagian store
