@@ -10,9 +10,9 @@ import {
   REGISTER,
   REHYDRATE,
 } from "redux-persist";
-import sliderReducer from "../features/sliderSlice";
 import productsReducer from "../features/productsSlice";
 import cartReducer from "../features/cartSlice";
+import wishlistReducer from "../features/wishlistSlice";
 
 const persistConfig = {
   key: "betamart",
@@ -22,13 +22,14 @@ const persistConfig = {
 
 // New products reducer for persisted products state
 const persistedCartReducer = persistReducer(persistConfig, cartReducer);
+const persistedWishlistReducer = persistReducer(persistConfig, wishlistReducer);
 
 // Redux store configuration
 export const store = configureStore({
   reducer: {
-    slider: sliderReducer,
     products: productsReducer,
     cart: persistedCartReducer,
+    wishlist: persistedWishlistReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
