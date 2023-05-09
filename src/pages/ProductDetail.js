@@ -10,6 +10,7 @@ import ProductCard from "../components/ProductCard";
 import Layout from "../components/Layout";
 import { addToWishlist } from "../utils/redux/features/wishlistSlice";
 import { removeFromWishlist } from "../utils/redux/features/wishlistSlice";
+import Loading from "../components/Loading";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -18,11 +19,9 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState([]);
   const [getProductLoading, setGetProductLoading] = useState(true);
-  const [getProductError, setGetProductError] = useState("");
   const [productsByCategory, setProductsByCategory] = useState([]);
   const [productsByCategoryLoading, setProductsByCategoryLoading] =
     useState(true);
-  const [productsByCategoryError, setProductsByCategoryError] = useState("");
 
   const relatedProducts = productsByCategory.filter(
     (item) => item.id !== product.id
@@ -30,7 +29,6 @@ const ProductDetail = () => {
   const wishlistProducts = useSelector(
     (state) => state.wishlist.wishlistProducts
   );
-
   const isWishlist = wishlistProducts.some(
     (wishlistProduct) => wishlistProduct.id === product.id
   );
@@ -43,7 +41,7 @@ const ProductDetail = () => {
         setProduct(res.data);
       })
       .catch((err) => {
-        setGetProductError(err.message);
+        console.log(err.message);
       })
       .finally(() => {
         setGetProductLoading(false);
@@ -62,7 +60,6 @@ const ProductDetail = () => {
         setProductsByCategory(res.data.products);
       })
       .catch((err) => {
-        setProductsByCategoryError(err.message);
         console.log(err.message);
       })
       .finally(() => {
@@ -85,6 +82,17 @@ const ProductDetail = () => {
   const handleIncreaseQuantity = () => {
     setQuantity(quantity + 1);
   };
+
+  // get product by id loading condition
+  if (getProductLoading) {
+    return (
+      <Layout>
+        <div className="-mt-24">
+          <Loading />
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -194,22 +202,26 @@ const ProductDetail = () => {
       {/* Related Products */}
       <div className="mb-5 border-t border-gray-400 pt-7 ">
         <h2 className="font-bold font-inter">Related Products</h2>
-        <div className="mt-2 grid grid-cols-2 sml:grid-cols-3 mdm:grid-cols-4 lgm:grid-cols-5 xlm:grid-cols-7 xs:w-[310px] sm:w-full mx-auto mdm:w-[650px] sml:w-[460px] lgm:w-[800px] lgl:w-[850px] xlm:w-[1100px] gap-y-2">
-          {relatedProducts?.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              description={product.description}
-              price={product.price}
-              discount={product.discountPercentage}
-              rating={product.rating}
-              stock={product.stock}
-              category={product.category}
-              image={product.thumbnail}
-            />
-          ))}
-        </div>
+        {productsByCategoryLoading ? (
+          <Loading />
+        ) : (
+          <div className="mt-2 grid grid-cols-2 sml:grid-cols-3 mdm:grid-cols-4 lgm:grid-cols-5 xlm:grid-cols-7 xs:w-[310px] sm:w-full mx-auto mdm:w-[650px] sml:w-[460px] lgm:w-[800px] lgl:w-[850px] xlm:w-[1100px] gap-y-2">
+            {relatedProducts?.map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                title={product.title}
+                description={product.description}
+                price={product.price}
+                discount={product.discountPercentage}
+                rating={product.rating}
+                stock={product.stock}
+                category={product.category}
+                image={product.thumbnail}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </Layout>
   );
