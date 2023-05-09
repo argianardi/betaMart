@@ -1,13 +1,15 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
-import { BsCart, BsHeart } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import { BsCart, BsHeart, BsHeartFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { addToCart } from "../utils/redux/features/cartSlice";
 import productAPI from "../services/productAPI";
 import ProductCard from "../components/ProductCard";
 import Layout from "../components/Layout";
+import { addToWishlist } from "../utils/redux/features/wishlistSlice";
+import { removeFromWishlist } from "../utils/redux/features/wishlistSlice";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -24,6 +26,13 @@ const ProductDetail = () => {
 
   const relatedProducts = productsByCategory.filter(
     (item) => item.id !== product.id
+  );
+  const wishlistProducts = useSelector(
+    (state) => state.wishlist.wishlistProducts
+  );
+
+  const isWishlist = wishlistProducts.some(
+    (wishlistProduct) => wishlistProduct.id === product.id
   );
 
   // get product by id
@@ -80,12 +89,11 @@ const ProductDetail = () => {
   return (
     <Layout>
       {/* Product detail */}
-      <div className="max-w-full mdm:w-[500px] mdm:border-2 mdm:border-gray-200 lgm:w-[800px] rounded-none mdm:rounded-md mdl:w-[700px] mx-auto my-5 overflow-hidden">
+      <div className="max-w-full mdm:w-[500px] mdm:border-2  mdm:border-gray-200 lgm:w-[800px] rounded-none mdm:rounded-md mdl:w-[700px] mx-auto my-5 overflow-hidden">
         <div className="items-end block mdl:flex">
           {/*Product image, price, title  and wishlist & cart button*/}
-
           <div className="w-full mdl:w-[300px]">
-            <figure className="w-full h-[300px] sm:h-[370px] sml:h-[500px] mdm:h-[400px] mdl:w-[300px] mdl:h-[300px] mx-auto ">
+            <figure className="min-w-full -mx-8 h-[300px] sm:h-[370px] sml:h-[500px] mdm:h-[400px] mdl:w-[300px] mdl:h-[300px] mdm:mx-auto ">
               <img
                 src={product.thumbnail}
                 alt={product.title}
@@ -93,9 +101,32 @@ const ProductDetail = () => {
               />
             </figure>
             <div className="flex justify-around mt-2 text-black ">
-              <button>
-                <BsHeart color="red" size={20} />{" "}
-              </button>
+              {isWishlist ? (
+                <button
+                  onClick={() => dispatch(removeFromWishlist(product.id))}
+                >
+                  <BsHeartFill color="red" size={20} />
+                </button>
+              ) : (
+                <button
+                  onClick={() =>
+                    dispatch(
+                      addToWishlist({
+                        id: product.id,
+                        title: product.title,
+                        description: product.description,
+                        price: product.price,
+                        discount: product.discountPercentage,
+                        rating: product.rating,
+                        stock: product.stock,
+                        image: product.thumbnail,
+                      })
+                    )
+                  }
+                >
+                  <BsHeart color="red" size={20} />{" "}
+                </button>
+              )}
               <div className="flex items-center border-[1px] border-black rounded-md h-7 mx-2">
                 <button
                   onClick={handleDecreaseQuantity}
