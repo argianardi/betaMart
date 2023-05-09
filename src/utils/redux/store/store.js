@@ -10,7 +10,6 @@ import {
   REGISTER,
   REHYDRATE,
 } from "redux-persist";
-import productsReducer from "../features/productsSlice";
 import cartReducer from "../features/cartSlice";
 import wishlistReducer from "../features/wishlistSlice";
 
@@ -27,7 +26,6 @@ const persistedWishlistReducer = persistReducer(persistConfig, wishlistReducer);
 // Redux store configuration
 export const store = configureStore({
   reducer: {
-    products: productsReducer,
     cart: persistedCartReducer,
     wishlist: persistedWishlistReducer,
   },
