@@ -53,7 +53,6 @@ const Main = () => {
             stock={product.stock}
             category={product.category}
             image={product.thumbnail}
-            // onGotoProductDetail={() => gotoProductDetailHandler(product)}
           />
         ))}
       </div>
@@ -62,3 +61,5 @@ const Main = () => {
 };
 
 export default Main;
+
+// baru sampai wishlist di bagian store
