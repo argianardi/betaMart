@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import Layout from "../components/Layout";
-import ProductCard from "../components/ProductCard";
+import WishlistProductCard from "../components/WishlistProductCard";
 
 const Wishlist = () => {
   const wishlistProducts = useSelector(
@@ -13,9 +13,13 @@ const Wishlist = () => {
     <Layout>
       <h2 className="mt-2 text-xl font-bold">Wishlist</h2>
       {wishlistProducts.length > 0 ? (
-        <div className="grid w-full grid-cols-2 gap-y-3 xs:w-[300px] sm:w-[360px] my-16 sml:grid-cols-3 mx-auto mdm:w-[650px] sml:w-[460px] justify-items-center mdm:grid-cols-4 mdm:gap-y-4 lgm:grid-cols-5 xlm:grid-cols-7 lgm:w-[800px] lgl:w-[850px] xlm:w-[1100px]">
+        <div
+          className="w-full gap-y-3 xs:w-[300px] sm:w-[360px] my-10 mdm:w-[600px] mdl:w-[700px] lgm:w-full sml:w-[460px] grid grid-cols-1 sml:grid-cols-2 mdm:grid-cols-3 lgm:grid-cols-4 mx-auto xlm:grid-cols-5
+        justify-items-center mdm:justify-items-start
+        "
+        >
           {wishlistProducts.map((product) => (
-            <ProductCard
+            <WishlistProductCard
               key={product.id}
               id={product.id}
               title={product.title}
